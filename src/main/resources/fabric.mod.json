@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "survivaltools",
+	"version": "${version}",
+	"name": "Survival Tools",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/survivaltools/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"nl.jandt.SurvivalTools"
+		],
+		"client": [
+			"nl.jandt.SurvivalToolsClient"
+		]
+	},
+	"mixins": [
+		"survivaltools.mixins.json",
+		{
+			"config": "survivaltools.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
