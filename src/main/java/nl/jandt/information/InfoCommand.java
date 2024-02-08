@@ -1,27 +1,28 @@
-package nl.jandt;
+package nl.jandt.information;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.entity.Entity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import nl.jandt.SurvivalTools;
+import nl.jandt.utils.SrvConfigModel;
 import org.jetbrains.annotations.Nullable;
 
 public class InfoCommand implements Command<ServerCommandSource> {
-    private final nl.jandt.SrvConfig config;
+    private static final SrvConfigModel.InfoConfig INFO_CONFIG = SurvivalTools.CONFIG.infoConfig();
+    public static InfoCommand instance = new InfoCommand();
 
-    public InfoCommand(nl.jandt.SrvConfig config) {
-        this.config = config;
-    }
+    public void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
+        if (!INFO_CONFIG.enabled) {
+            return;
+        }
 
-    public void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager
-                .literal("info")
+                .literal(INFO_CONFIG.command)
                 .executes(this));
     }
 
@@ -32,7 +33,7 @@ public class InfoCommand implements Command<ServerCommandSource> {
         final @Nullable ServerPlayerEntity player = source.getPlayerOrThrow();
         assert player != null;
 
-        player.sendMessage(Text.of(this.config.infoMessage()));
+        player.sendMessage(Text.Serialization.fromJson(INFO_CONFIG.message));
 
         return 0;
     }
