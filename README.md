@@ -38,4 +38,9 @@
 
 ### License
 
-This contribution is licensed under [Mozilla Public License v2.0](LICENSE) (or <https://www.mozilla.org/en-US/MPL/2.0/>).
+All files in this repository are licensed under the [Mozilla Public License 2.0](LICENSE)
+(also available at <https://www.mozilla.org/en-US/MPL/2.0/>), unless stated otherwise.
+
+Unless you explicitly state otherwise,
+any contribution intentionally submitted for inclusion in the work by you,
+shall be licensed under the MPL-2.0 license as stated above.

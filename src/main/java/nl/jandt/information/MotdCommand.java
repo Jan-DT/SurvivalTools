@@ -1,3 +1,4 @@
+/* Licensed under MPL 2.0, available at https://www.mozilla.org/en-US/MPL/2.0/ */
 package nl.jandt.information;
 
 import com.mojang.brigadier.Command;
