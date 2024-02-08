@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MotdCommand implements Command<ServerCommandSource> {
-    public static final SrvConfig.MotdConfig MOTD_CONFIG = SurvivalTools.CONFIG.motdConfig;
+    private static final SrvConfig.MotdConfig MOTD_CONFIG = SurvivalTools.CONFIG.motdConfig;
     public static MotdCommand instance = new MotdCommand();
 
     public void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
