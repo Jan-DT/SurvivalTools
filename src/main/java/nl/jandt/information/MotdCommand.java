@@ -11,26 +11,26 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import nl.jandt.SurvivalTools;
-import nl.jandt.utils.SrvConfigModel;
+import nl.jandt.utils.SrvConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MotdCommand implements Command<ServerCommandSource> {
-    public static final SrvConfigModel.MotdConfig MOTD_CONFIG = SurvivalTools.CONFIG.motdConfig();
+    public static final SrvConfig.MotdConfig MOTD_CONFIG = SurvivalTools.CONFIG.motdConfig;
     public static MotdCommand instance = new MotdCommand();
 
     public void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
-        if (!MOTD_CONFIG.enabled) {
+        if (!MOTD_CONFIG.enabled()) {
             return;
         }
 
         dispatcher.register(CommandManager
-                .literal(MOTD_CONFIG.command)
+                .literal(MOTD_CONFIG.command())
                 .executes(this));
     }
 
     public void registerJoin(ServerPlayNetworkHandler handler) {
-        if (!MOTD_CONFIG.enabled) {
+        if (!MOTD_CONFIG.enabled()) {
             return;
         }
 
@@ -51,6 +51,6 @@ public class MotdCommand implements Command<ServerCommandSource> {
     }
 
     public void sendMotd(@NotNull ServerPlayerEntity targetPlayer) {
-        targetPlayer.sendMessage(Text.Serialization.fromJson(MOTD_CONFIG.message));
+        targetPlayer.sendMessage(Text.Serialization.fromJson(MOTD_CONFIG.message()));
     }
 }

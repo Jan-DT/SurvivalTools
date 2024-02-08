@@ -10,20 +10,20 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import nl.jandt.SurvivalTools;
-import nl.jandt.utils.SrvConfigModel;
+import nl.jandt.utils.SrvConfig;
 import org.jetbrains.annotations.Nullable;
 
 public class InfoCommand implements Command<ServerCommandSource> {
-    private static final SrvConfigModel.InfoConfig INFO_CONFIG = SurvivalTools.CONFIG.infoConfig();
+    private static final SrvConfig.InfoConfig INFO_CONFIG = SurvivalTools.CONFIG.infoConfig;
     public static InfoCommand instance = new InfoCommand();
 
     public void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
-        if (!INFO_CONFIG.enabled) {
+        if (!INFO_CONFIG.enabled()) {
             return;
         }
 
         dispatcher.register(CommandManager
-                .literal(INFO_CONFIG.command)
+                .literal(INFO_CONFIG.command())
                 .executes(this));
     }
 
@@ -34,7 +34,7 @@ public class InfoCommand implements Command<ServerCommandSource> {
         final @Nullable ServerPlayerEntity player = source.getPlayerOrThrow();
         assert player != null;
 
-        player.sendMessage(Text.Serialization.fromJson(INFO_CONFIG.message));
+        player.sendMessage(Text.Serialization.fromJson(INFO_CONFIG.message()));
 
         return 0;
     }
