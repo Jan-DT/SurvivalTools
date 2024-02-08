@@ -4,15 +4,17 @@ package nl.jandt.utils;
 import io.wispforest.owo.config.annotation.Config;
 import io.wispforest.owo.config.annotation.Nest;
 
+@SuppressWarnings("unused")
 @Config(name = "stconfig", wrapperName = "SrvConfig")
 public class SrvConfigModel {
-    @SuppressWarnings("unused")
     @Nest
     public MotdConfig motdConfig = new MotdConfig();
 
-    @SuppressWarnings("unused")
     @Nest
     public InfoConfig infoConfig = new InfoConfig();
+
+    @Nest
+    public ConflictConfig conflictConfig = new ConflictConfig();
 
     public static class MotdConfig {
         /**
@@ -46,6 +48,18 @@ public class SrvConfigModel {
          * The message to send when the InfoCommand is run
          */
         public String message = "[\"\",{\"text\":\"\\n\"},{\"text\":\"Testmessage\",\"color\":\"aqua\"},{\"text\":\"\\n\\n\"},{\"text\":\"Multiline RGB\\n!\",\"color\":\"#FF00C0\"}]";
+    }
 
+    public static class ConflictConfig {
+        /**
+         * Defines whether the conflict system is enabled
+         */
+        public boolean enabled = true;
+
+        public String constitutionCommand = "constitution";
+
+        public String constitutionItemName = "[\"§r\",{\"text\":\"§rConstitution\",\"italic\":false,\"color\":\"#FFE700\"}]";
+
+        public String lawCommand = "law";
     }
 }

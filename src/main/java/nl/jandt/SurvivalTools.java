@@ -4,6 +4,7 @@ package nl.jandt;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import nl.jandt.conflict.ConsitutionBook;
 import nl.jandt.information.InfoCommand;
 import nl.jandt.information.MotdCommand;
 import nl.jandt.utils.SrvConfig;
@@ -26,6 +27,7 @@ public class SurvivalTools implements ModInitializer {
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> InfoCommand.instance.registerCommand(dispatcher));
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> MotdCommand.instance.registerCommand(dispatcher));
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> ConsitutionBook.instance.registerCommand(dispatcher));
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> MotdCommand.instance.registerJoin(handler));
 
